@@ -1,7 +1,6 @@
 "use client";
 
 import { type CSSProperties, useEffect, useMemo, useState } from "react";
-import Script from "next/script";
 
 const blades = [
   {
@@ -69,17 +68,16 @@ export default function Home() {
     return (
       <main className="loading-screen" onClick={() => setHasEntered(true)}>
         <div className="loading-panel">
-          <Script
-            type="module"
-            src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" //google model viewer to access glb 3d rotatble blender
-          />
-
-          <model-viewer
-            src="/television/televisionTEST.glb"
-            alt="A 3D model of my blender asset"
-            auto-rotate
-            camera-controls
-            interaction-prompt="none"
+          <video
+            className="loading-video"
+            src="/television/startscreenblenderV2.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+            disablePictureInPicture
+            controls={false}
           />
           <button className ="startfont anim" type="button"><span>C</span><span>l</span><span>i</span><span>c</span><span>k</span> <span>t</span><span>o</span> <span>s</span><span>t</span><span>a</span><span>r</span><span>t</span> </button>
         </div>

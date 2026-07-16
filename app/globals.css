@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @font-face { /*for the intro font*/
-  font-family: "Game Paused DEMO";
-  src: url("/fonts/Game Paused DEMO.otf") format("opentype");
+  font-family: "PixelPurl";
+  src: url("/fonts/PixelPurl.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -22,28 +22,67 @@
 
 .loading-screen {
   background-color: black;
-  display:grid;
+  cursor: pointer;
+  display: grid;
   place-items: center;
-  width: 100vw;
   height: 100vh;
+  position: relative;
   overflow: hidden;
+  width: 100vw;
+}
+
+.loading-screen::before {
+  background:
+    radial-gradient(circle at 50% 44%, transparent 0 38%, rgba(0, 0, 0, 0.34) 68%, rgba(0, 0, 0, 0.86) 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.38), transparent 22%, transparent 72%, rgba(0, 0, 0, 0.62));
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.loading-screen::after {
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0 1px, rgba(112, 255, 66, 0.025) 1px 2px, transparent 2px 6px);
+  content: "";
+  inset: 0;
+  opacity: 0.28;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+body:has(.loading-screen)::before {
+  display: none;
 }
 
 .loading-panel {
   display: grid;
   place-items: center;
-  animation-delay:0.5s;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  animation-delay: 0.5s;
 }
-.loading-panel model-viewer {
-  width: min(90vw, 80rem);
-  height: min(75vh, 48rem);
+
+.loading-video {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
 }
 
 .startfont {
-  font-family: "Game Paused DEMO";
+  font-family: "PixelPurl";
+  color: white;
   font-size: 100px;
+  position: relative;
   text-transform: uppercase;
-  
+  z-index: 3;
 }
 .startfont span {
   display: inline-block;
@@ -56,7 +95,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-7px); /* Move 15px up */
+    transform: translateY(-3px); /* Move 15px up */
   }
 }
 
@@ -639,7 +678,7 @@ button {
   margin: 0;
 }
 /*.movement-keys {
-  font-family: "Game Paused DEMO";
+  font-family: "PixelPurl";
   font-size: 30px;
   animation-delay: 0.5s;
 }*/
