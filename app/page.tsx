@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useEffect, useMemo, useState } from "react";
+import { type CSSProperties, useEffect, useMemo, useState, useRef } from "react";
 
 const blades = [
   {
@@ -33,6 +33,7 @@ export default function Home() {
   const [hasEntered, setHasEntered] = useState(false);
   const [selectedBlade, setSelectedBlade] = useState(0);
   const activeBlade = blades[selectedBlade];
+  const contentRef = useRef<HTMLElement | null>(null); //use ref to be set to null on click make val
 
   const clock = useMemo(() => {
     return new Intl.DateTimeFormat("en", {
@@ -88,111 +89,137 @@ export default function Home() {
   }
 
   return (
-    <main className="dashboard-shell">
-      <div className="ambient-grid" />
-      <div className="screen-scale">
-        <section className="console-stage" aria-label="Portfolio dashboard">
+    <>
+      <main className="dashboard-shell">
+        <div className="ambient-grid" />
+        <div className="screen-scale">
+          <section className="console-stage" aria-label="Portfolio dashboard">
 
-        <header className="profile-bar anim">
+          <header className="profile-bar anim">
 
-          <div className="profile-card anim" aria-label="Profile summary">
-            <div>
+            <div className="profile-card anim" aria-label="Profile summary">
+              <div>
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        <nav className="section-rail" aria-label="Portfolio menu">
-          {blades.map((blade, index) => (
-            <button
-              className={selectedBlade === index ? "is-current" : ""}
-              key={blade.title}
-              onClick={() => setSelectedBlade(index)}
-              type="button"
-            >
-              {blade.title}
-            </button>
-          ))}
-        </nav>
-
-        <div className="section-title anim">
-          <span>My Portfolio</span>
-          <strong>{activeBlade.title}</strong>
-        </div>
-
-        <section className="blade-row anim" aria-label="Portfolio sections">
-          {blades.map((blade, index) => {
-            const offset = index - selectedBlade;
-            const isActive = offset === 0;
-            const cardLeft =
-              offset < 0 ? `${-18 + offset * 7}rem` : isActive ? "0rem" : `${20 + (offset - 1) * 7.6}rem`;
-
-            return (
+          <nav className="section-rail" aria-label="Portfolio menu">
+            {blades.map((blade, index) => (
               <button
-                className={`blade-card ${isActive ? "is-active" : ""}`}
+                className={selectedBlade === index ? "is-current" : ""}
                 key={blade.title}
-                onClick={() => setSelectedBlade(index)}
-                type="button"
-                style={
-                  {
-                    "--blade-offset": `${offset}`,
-                    "--blade-distance": `${Math.abs(offset)}`,
-                    "--card-left": cardLeft,
-                  } as CSSProperties
+                onClick={() => {
+                  setSelectedBlade(index)
+                  contentRef.current?.scrollIntoView({ behavior: "smooth" });}
                 }
-                aria-pressed={isActive}
+                type="button"
               >
-                <span className="blade-icon">{blade.stat}</span>
-                <span className="blade-number">{blade.stat}</span>
-                <span className="blade-eyebrow">{blade.eyebrow}</span>
-                <strong>{blade.title}</strong>
+                {blade.title}
               </button>
-            );
-          })}
-        </section>
+            ))}
+          </nav>
 
-        <aside className="avatar-stage anim" aria-label="Blender avatar preview space">
-          <div className="avatar-hud anim" aria-hidden="true">
-            <span>Jiles Smith</span>
-            <span>Age: 21</span>
-            <span>Hair: Black</span>
-            <span></span>
+          <div className="section-title anim">
+            <span>My Portfolio</span>
+            <strong>{activeBlade.title}</strong>
           </div>
-          <div className="avatar-shadow" />
-          <div className="avatar-video-frame">
-            <img
-              className="avatar-gif"
-              src="/avatar/avataridleV2.gif"
-              alt=""
-              aria-hidden="true"
-            />
-          </div>
-        </aside>
 
-        <section className="content-dock" aria-label="Portfolio details">
-          <div className="dock-panel">
-            <span>Latest Projects</span>
-            <div className="mini-tile-row">
-              {projects.map((project) => (
-                <div className="mini-tile" key={project}>
-                  {project}
-                </div>
-              ))}
+          <section className="blade-row anim" aria-label="Portfolio sections">
+            {blades.map((blade, index) => {
+              const offset = index - selectedBlade;
+              const isActive = offset === 0;
+              const cardLeft =
+                offset < 0 ? `${-18 + offset * 7}rem` : isActive ? "0rem" : `${20 + (offset - 1) * 7.6}rem`;
+
+              return (
+                <button
+                  className={`blade-card ${isActive ? "is-active" : ""}`}
+                  key={blade.title}
+                  onClick={() => setSelectedBlade(index)}
+                  type="button"
+                  style={
+                    {
+                      "--blade-offset": `${offset}`,
+                      "--blade-distance": `${Math.abs(offset)}`,
+                      "--card-left": cardLeft,
+                    } as CSSProperties
+                  }
+                  aria-pressed={isActive}
+                >
+                  <span className="blade-icon">{blade.stat}</span>
+                  <span className="blade-number">{blade.stat}</span>
+                  <span className="blade-eyebrow">{blade.eyebrow}</span>
+                  <strong>{blade.title}</strong>
+                </button>
+              );
+            })}
+          </section>
+
+          <aside className="avatar-stage anim" aria-label="Blender avatar preview space">
+            <div className="avatar-hud anim" aria-hidden="true">
+              <span>Jiles Smith</span>
+              <span>Age: 21</span>
+              <span>Hair: Black</span>
+              <span></span>
             </div>
-          </div>
+            <div className="avatar-shadow" />
+            <div className="avatar-video-frame">
+              <img
+                className="avatar-gif"
+                src="/avatar/avataridleV2.gif"
+                alt=""
+                aria-hidden="true"
+              />
+            </div>
+          </aside>
 
-          <div className="dock-panel contact-panel">
-            <span>Online Status</span>
-            <strong>Open to build</strong>
-            <p>{clock} - GitHub / Resume / Email links go here.</p>
-          </div>
-        </section>
+          <section className="content-dock" aria-label="Portfolio details">
+            <div className="dock-panel">
+              <span>Latest Projects</span>
+              <div className="mini-tile-row">
+                {projects.map((project) => (
+                  <div className="mini-tile" key={project}>
+                    {project}
+                  </div>
+                ))}
+              </div>
+            </div>
 
-        <footer className="control-strip anim">
-          <span className="control-dot muted">{"<"}</span>
-          <span className="control-dot muted">{">"}</span>
-        </footer>
+            <div className="dock-panel contact-panel">
+              <span>Online Status</span>
+              <strong>Open to build</strong>
+              <p>{clock} - GitHub / Resume / Email links go here.</p>
+            </div>
+          </section>
+
+          <footer className="control-strip anim">
+            <span className="control-dot muted">{"<"}</span>
+            <span className="control-dot muted">{">"}</span>
+          </footer>
+          </section>
+        </div>
+      </main>
+      <section ref={contentRef} className="blade-page">
+          {selectedBlade === 0 && (
+            <div>
+              <h1>Project1</h1>
+              <p>hi</p>
+            </div>
+          )}
+          {selectedBlade === 1 && (
+            <div>
+              <h1>About</h1>
+              <p>hi</p>
+            </div>
+          )}
+          {selectedBlade === 2 && (
+            <div>
+              <h1>Contact</h1>
+              <p>hi</p>
+            </div>
+          )}
+
         </section>
-      </div>
-    </main>
+      </>
   );
 }
