@@ -68,18 +68,20 @@ export default function Home() {
     return (
       <main className="loading-screen" onClick={() => setHasEntered(true)}>
         <div className="loading-panel">
-          <video
-            className="loading-video"
-            src="/television/startscreenblenderV2.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden="true"
-            disablePictureInPicture
-            controls={false}
-          />
-          <button className ="startfont anim" type="button"><span>C</span><span>l</span><span>i</span><span>c</span><span>k</span> <span>t</span><span>o</span> <span>s</span><span>t</span><span>a</span><span>r</span><span>t</span> </button>
+          <div className= "crt-power-on">
+            <video
+              className="loading-video"
+              src="/television/startscreenblenderV2.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+              disablePictureInPicture
+              controls={false}
+            />
+            <button className ="startfont" type="button"><span>C</span><span>l</span><span>i</span><span>c</span><span>k</span> <span>t</span><span>o</span> <span>s</span><span>t</span><span>a</span><span>r</span><span>t</span> </button>
+          </div>
         </div>
       </main>
     );

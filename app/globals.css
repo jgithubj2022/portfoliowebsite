@@ -76,14 +76,102 @@ body:has(.loading-screen)::before {
   z-index: 0;
 }
 
+.crt-power-on {
+  height: 100vh;
+  width: 100vw;
+  animation: crt-power-on 1.4s ease-out forwards;
+  overflow: hidden;
+  display: grid;
+  place-items: center; /*to center children like startfont*/
+  position: relative;
+  transform-origin: center;
+}
+
+@keyframes crt-power-on {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.01) scaleX(0.2);
+    filter: brightness(4) blur(2px);
+  }
+
+  18% {
+    opacity: 1;
+    transform: scaleY(0.015) scaleX(0.9);
+    filter: brightness(6) blur(1px);
+  }
+
+  45% {
+    transform: scaleY(0.18) scaleX(1);
+    filter: brightness(2.4) blur(0.8px);
+  }
+
+  72% {
+    transform: scaleY(1.08) scaleX(1);
+    filter: brightness(1.4) blur(0.2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1) scaleX(1);
+    filter: brightness(1) blur(0);
+  }
+}
+.crt-power-on::before {
+  background: white;
+  content: "";
+  height: 2px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  animation: crt-flash-line 0.8s ease-out forwards;
+  z-index: 4;
+}
+@keyframes crt-flash-line {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.1);
+  }
+
+  25% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
 .startfont {
   font-family: "PixelPurl";
   color: white;
   font-size: 100px;
-  position: relative;
+  text-align: center;
   text-transform: uppercase;
   z-index: 3;
+  animation: start-text-flicker 1s ease-out 1.3s forwards;
 }
+@keyframes start-text-flicker {
+  0%, 20%, 45% {
+    opacity: 0;
+  }
+
+  25%, 55% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .startfont span {
   display: inline-block;
   /*animation-delay: 0.5s;*/
@@ -161,6 +249,32 @@ button {
   position: relative;
   overflow: hidden;
   width: 100vw;
+  animation: dash-on 2s ease-in forwards;
+}
+
+@keyframes dash-on {
+  0% {
+    opacity: 0;
+    transform: translateY(1.4rem) scale(0.985);
+    filter: brightness(0.35) saturate(0.8) blur(10px);
+  }
+
+  38% {
+    opacity: 1;
+    transform: translateY(0.45rem) scale(1.006);
+    filter: brightness(1.28) saturate(1.18) blur(2px);
+  }
+
+  68% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1.08) saturate(1.08) blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1) blur(0);
+  }
 }
 
 .dashboard-shell::before {
@@ -404,7 +518,7 @@ button {
   height: clamp(15rem, 28vw, 19rem);
   margin-top: clamp(1rem, 2.5vw, 1.8rem);
   position: relative;
-  animation-delay: 0.5;
+  animation-delay: 1s;
 }
 
 .blade-card {
@@ -535,7 +649,7 @@ button {
   left: min(51vw, 45rem);
   position: absolute;
   width: min(42rem, 62vw);
-  animation-delay: 0.5s;
+  animation-delay: 1s;
 }
 
 .avatar-stage p {
@@ -610,7 +724,7 @@ button {
   position: absolute;
   text-transform: uppercase;
   top: 65%;
-  animation-delay: 0.5s;
+  animation-delay: 1s;
 }
 
 .avatar-hud::before {
