@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useEffect, useMemo, useState, useRef } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 
 const blades = [
   {
@@ -10,7 +10,7 @@ const blades = [
   },
   {
     eyebrow: "Player Profile",
-    title: "About",
+    title: "Skills",
     stat: "2",
   },
   {
@@ -22,25 +22,24 @@ const blades = [
 
 const projects = [
   "MangaBite",
-  "Portfolio OS",
-  "FastAPI Tools",
-  "Next.js Labs",
+  "Sea-Predictor",
+  "MusicAffinity",
 ];
 
-const skills = ["Next.js", "FastAPI", "React", "TypeScript", "Python", "Vercel"];
+const skills = ["Next.js ", "FastAPI ", "React ", "TypeScript ", "Python ", "Vercel "];
 
 export default function Home() {
   const [hasEntered, setHasEntered] = useState(false);
   const [selectedBlade, setSelectedBlade] = useState(0);
   const activeBlade = blades[selectedBlade];
-  const contentRef = useRef<HTMLElement | null>(null); //use ref to be set to null on click make val
+  const contentRef = useRef<HTMLElement | null>(null);
 
-  const clock = useMemo(() => {
-    return new Intl.DateTimeFormat("en", {
-      hour: "numeric",
-      minute: "2-digit",
-    }).format(new Date());
-  }, []);
+  const openBladePage = (index: number) => {
+    setSelectedBlade(index);
+    window.requestAnimationFrame(() => {
+      contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -65,11 +64,11 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  if (!hasEntered) { //havent entered the game so screen is diff
+  if (!hasEntered) {
     return (
       <main className="loading-screen" onClick={() => setHasEntered(true)}>
         <div className="loading-panel">
-          <div className= "crt-power-on">
+          <div className="crt-power-on">
             <video
               className="loading-video"
               src="/television/startscreenblenderV2.mp4"
@@ -81,7 +80,7 @@ export default function Home() {
               disablePictureInPicture
               controls={false}
             />
-            <button className ="startfont" type="button"><span>C</span><span>l</span><span>i</span><span>c</span><span>k</span> <span>t</span><span>o</span> <span>s</span><span>t</span><span>a</span><span>r</span><span>t</span> </button>
+            <button className="startfont" type="button"><span>C</span><span>l</span><span>i</span><span>c</span><span>k</span> <span>t</span><span>o</span> <span>s</span><span>t</span><span>a</span><span>r</span><span>t</span></button>
           </div>
         </div>
       </main>
@@ -108,10 +107,7 @@ export default function Home() {
               <button
                 className={selectedBlade === index ? "is-current" : ""}
                 key={blade.title}
-                onClick={() => {
-                  setSelectedBlade(index)
-                  contentRef.current?.scrollIntoView({ behavior: "smooth" });}
-                }
+                onClick={() => openBladePage(index)}
                 type="button"
               >
                 {blade.title}
@@ -135,7 +131,7 @@ export default function Home() {
                 <button
                   className={`blade-card ${isActive ? "is-active" : ""}`}
                   key={blade.title}
-                  onClick={() => setSelectedBlade(index)}
+                  onClick={() => openBladePage(index)}
                   type="button"
                   style={
                     {
@@ -159,7 +155,7 @@ export default function Home() {
             <div className="avatar-hud anim" aria-hidden="true">
               <span>Jiles Smith</span>
               <span>Age: 21</span>
-              <span>Hair: Black</span>
+              <span>Focus: Fullstack</span>
               <span></span>
             </div>
             <div className="avatar-shadow" />
@@ -173,53 +169,54 @@ export default function Home() {
             </div>
           </aside>
 
-          <section className="content-dock" aria-label="Portfolio details">
-            <div className="dock-panel">
-              <span>Latest Projects</span>
-              <div className="mini-tile-row">
-                {projects.map((project) => (
-                  <div className="mini-tile" key={project}>
-                    {project}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="dock-panel contact-panel">
-              <span>Online Status</span>
-              <strong>Open to build</strong>
-              <p>{clock} - GitHub / Resume / Email links go here.</p>
-            </div>
-          </section>
 
           <footer className="control-strip anim">
-            <span className="control-dot muted">{"<"}</span>
-            <span className="control-dot muted">{">"}</span>
+            <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.max(current - 1, 0))}>{"<"}</button>  
+            <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.min(current + 1, blades.length - 1))}>{">"}</button> 
           </footer>
           </section>
         </div>
       </main>
       <section ref={contentRef} className="blade-page">
+        <div className="blade-page-layout">
           {selectedBlade === 0 && (
-            <div>
-              <h1>Project1</h1>
-              <p>hi</p>
-            </div>
+            <section className="blade-page-panel" aria-label="Projects">
+              <h1 className="blade-page-header">Projects</h1>
+              <div className="blade-page-body">
+                <div className="blade-page-list">
+                  {projects.map((project) => (
+                    <div className="blade-page-tile" key={project}>
+                      {project}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
           )}
           {selectedBlade === 1 && (
-            <div>
-              <h1>About</h1>
-              <p>hi</p>
-            </div>
+            <section className="blade-page-panel" aria-label="Skills">
+              <h1 className="blade-page-header">Skills</h1>
+              <div className="blade-page-body">
+                <div className="blade-page-list">
+                  {skills.map((skill) => (
+                    <div className="blade-page-tile" key={skill}>
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
           )}
           {selectedBlade === 2 && (
-            <div>
-              <h1>Contact</h1>
-              <p>hi</p>
-            </div>
+            <section className="blade-page-panel" aria-label="Contact">
+              <h1 className="blade-page-header">Contact</h1>
+              <div className="blade-page-body">
+                <p className="blade-page-copy">email: jilessmithiiiwork@gmail.com</p>
+              </div>
+            </section>
           )}
-
-        </section>
+        </div>
+      </section>
       </>
   );
 }
