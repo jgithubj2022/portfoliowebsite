@@ -27,7 +27,7 @@ const projects = [
   },
   {
     title: "Sea-Predictor (Hackathon Winner)",
-    url: "https://github.com/Tvpower/SeaPredictor",
+    url: "https://devpost.com/software/seapredictor",
   },
   {
     title: "MusicAffinity",
