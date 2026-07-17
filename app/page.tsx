@@ -21,9 +21,18 @@ const blades = [
 ];
 
 const projects = [
-  "MangaBite",
-  "Sea-Predictor",
-  "MusicAffinity",
+  {
+    title: "MangaBite",
+    url: "https://github.com/jgithubj2022/manga-tracker",
+  },
+  {
+    title: "Sea-Predictor (Hackathon Winner)",
+    url: "https://github.com/Tvpower/SeaPredictor",
+  },
+  {
+    title: "MusicAffinity",
+    url: "https://github.com/jgithubj2022/music-affinity-calculator",
+  }
 ];
 
 const skills = ["Next.js ", "FastAPI ", "React ", "TypeScript ", "Python ", "Vercel "];
@@ -63,6 +72,7 @@ export default function Home() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
+
 
   if (!hasEntered) {
     return (
@@ -185,9 +195,14 @@ export default function Home() {
               <div className="blade-page-body">
                 <div className="blade-page-list">
                   {projects.map((project) => (
-                    <div className="blade-page-tile" key={project}>
-                      {project}
-                    </div>
+                    <button
+                      className="blade-page-tile"
+                      key={project.title}
+                      type="button"
+                      onClick={() => window.open(project.url, "_blank", "noreferrer")}
+                    >
+                      {project.title}
+                    </button>
                   ))}
                 </div>
               </div>
