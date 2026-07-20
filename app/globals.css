@@ -212,6 +212,9 @@ body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  width: 1200px;        /* Forces the desktop layout size */
+  margin: 0 auto;       /* Centers your website on the screen */
+  display: block;       /* Ensures the body obeys the width rule */
 }
 
 body::before {
