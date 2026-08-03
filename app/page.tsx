@@ -35,7 +35,7 @@ const projects = [
   }
 ];
 
-const skills = ["Next.js ", "FastAPI ", "React ", "TypeScript ", "Python ", "Vercel "];
+const skills = ["Next.js ", "FastAPI ", "React ", "TypeScript ", "Python ", "Vercel ", "MongoDB ", "Express.js ", "Node.js "];
 
 export default function Home() {
   const [hasEntered, setHasEntered] = useState(false);
@@ -227,7 +227,7 @@ export default function Home() {
               <h1 className="blade-page-header">Contact</h1>
               <div className="blade-page-body">
                 <p className="blade-page-copy">email: jilessmithiiiwork@gmail.com</p>
-                <p className="blade-page-copy">linkedin: https://www.linkedin.com/in/jiles-smith-29a463321/</p>
+                <p className="blade-page-copy">linkedin: https://www.linkedin.com/in/jiles-smith/</p>
               </div>
             </section>
           )}
