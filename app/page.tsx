@@ -32,7 +32,12 @@ const projects = [
   {
     title: "MusicAffinity",
     url: "https://github.com/jgithubj2022/music-affinity-calculator",
+  },
+  {
+    title: "ThinkBoard Voice Assistant",
+    url: "https://github.com/jgithubj2022/thinkboard-project",
   }
+
 ];
 
 const skills = ["Next.js ", "FastAPI ", "React ", "TypeScript ", "Python ", "Vercel ", "MongoDB ", "Express.js ", "Node.js "];
