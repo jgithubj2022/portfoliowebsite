@@ -164,6 +164,10 @@ export default function Home() {
                 </button>
               );
             })}
+            <nav className="control-strip anim" aria-label="Portfolio section controls">
+              <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.max(current - 1, 0))}>{"<"}</button>
+              <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.min(current + 1, blades.length - 1))}>{">"}</button>
+            </nav>
           </section>
 
           <aside className="avatar-stage anim" aria-label="Blender avatar preview space">
@@ -185,10 +189,6 @@ export default function Home() {
           </aside>
           </section>
         </div>
-        <footer className="control-strip anim">
-          <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.max(current - 1, 0))}>{"<"}</button>
-          <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.min(current + 1, blades.length - 1))}>{">"}</button>
-        </footer>
       </main>
       <section ref={contentRef} className="blade-page">
         <div className="blade-page-layout">

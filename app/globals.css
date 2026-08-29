@@ -733,16 +733,16 @@ button {
 
 .control-strip {
   align-items: center;
-  bottom: clamp(1.5rem, 8vh, 6rem);
+  bottom: 0;
   color: #ffffff;
   display: flex;
   font-size: 1.28rem;
   font-weight: 700;
   gap: 0.85rem;
-  left: 1rem;
-  position: fixed;
+  left: 0.5rem;
+  position: absolute;
   text-shadow: 0 0 18px rgba(105, 255, 55, 0.62);
-  z-index: 1000;
+  z-index: 30;
 }
 
 .control-dot {
