@@ -183,14 +183,12 @@ export default function Home() {
               />
             </div>
           </aside>
-
-
-          <footer className="control-strip anim">
-            <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.max(current - 1, 0))}>{"<"}</button>  
-            <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.min(current + 1, blades.length - 1))}>{">"}</button> 
-          </footer>
           </section>
         </div>
+        <footer className="control-strip anim">
+          <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.max(current - 1, 0))}>{"<"}</button>
+          <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.min(current + 1, blades.length - 1))}>{">"}</button>
+        </footer>
       </main>
       <section ref={contentRef} className="blade-page">
         <div className="blade-page-layout">
