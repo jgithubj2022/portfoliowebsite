@@ -39,6 +39,16 @@ const projects = [
   }
 
 ];
+const contacts = [
+  {
+    title: "LinkedIn",
+    url: "https://www.linkedin.com/in/jiles-smith/",
+  },
+  {
+    title: "Email",
+    url: "mailto:jilessmithiiiwork@gmail.com",
+  }
+];
 
 const skills = ["Next.js ", "FastAPI ", "React ", "TypeScript ", "Python ", "Vercel ", "MongoDB ", "Express.js ", "Node.js "];
 
@@ -229,8 +239,18 @@ export default function Home() {
             <section className="blade-page-panel" aria-label="Contact">
               <h1 className="blade-page-header">Contact</h1>
               <div className="blade-page-body">
-                <p className="blade-page-copy">email: jilessmithiiiwork@gmail.com</p>
-                <p className="blade-page-copy">linkedin: https://www.linkedin.com/in/jiles-smith/</p>
+                <div className="blade-page-list">
+                {contacts.map((contacts) => (
+                    <button
+                      className="blade-page-tile"
+                      key={contacts.title}
+                      type="button"
+                      onClick={() => window.open(contacts.url, "_blank", "noreferrer")}
+                    >
+                      {contacts.title}
+                    </button>
+                  ))}
+                </div>
               </div>
             </section>
           )}
