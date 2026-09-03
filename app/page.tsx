@@ -67,6 +67,8 @@ export default function Home() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      // Let appearance controls handle their own keyboard interaction.
+      if (event.target instanceof Element && event.target.closest(".appearance-menu")) return;
       if (event.key === "ArrowRight") {
         setSelectedBlade((current) => Math.min(current + 1, blades.length - 1));
       }
