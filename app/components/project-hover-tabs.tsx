@@ -16,13 +16,13 @@ const projects = [
             { src: "/projects/gallery/mangabite-settings.png", caption: "Account settings" },
         ],
     },
-    { title: "SeaPredictor", description: "From satellite detections to a navigable picture of where marine debris may travel.",
+    { title: "SeaPredictor", description: "Uses satellite detections to a navigable picture of where marine debris may travel.",
         url: "https://devpost.com/software/seapredictor",
         images: [
             { src: "/projects/originals/seapredictor.png", caption: "Marine debris drift map" },
         ],
     },
-    { title: "musicAffinity", description: "Explore genre matches from tempo, energy, and instrumentation—with a clear separation between prediction and explanation.",
+    { title: "musicAffinity", description: "Explore genre matches from tempo, energy, and instrumentation with a clear separation between prediction and explanation.",
         url: "https://github.com/jgithubj2022/music-affinity-calculator",
         images: [
             { src: "/projects/originals/music-affinity.png", caption: "Genre matches with Gemini explanation" },
