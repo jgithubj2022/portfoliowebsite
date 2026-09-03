@@ -1,6 +1,7 @@
 "use client";
 
 import { type CSSProperties, useEffect, useRef, useState } from "react";
+import ProjectHoverTabs from "./components/project-hover-tabs";
 
 const blades = [
   {
@@ -20,25 +21,6 @@ const blades = [
   },
 ];
 
-const projects = [
-  {
-    title: "MangaBite",
-    url: "https://github.com/jgithubj2022/manga-tracker",
-  },
-  {
-    title: "Sea-Predictor (Hackathon Winner)",
-    url: "https://devpost.com/software/seapredictor",
-  },
-  {
-    title: "MusicAffinity",
-    url: "https://github.com/jgithubj2022/music-affinity-calculator",
-  },
-  {
-    title: "ThinkBoard Voice Assistant",
-    url: "https://github.com/jgithubj2022/thinkboard-project",
-  }
-
-];
 const contacts = [
   {
     title: "LinkedIn",
@@ -67,8 +49,11 @@ export default function Home() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      // Let appearance controls handle their own keyboard interaction.
-      if (event.target instanceof Element && event.target.closest(".appearance-menu")) return;
+      if (event.defaultPrevented) return;
+      if (
+        event.target instanceof Element &&
+        event.target.closest(".appearance-menu, [data-project-hover-tabs]")
+      ) return;
       if (event.key === "ArrowRight") {
         setSelectedBlade((current) => Math.min(current + 1, blades.length - 1));
       }
@@ -207,19 +192,9 @@ export default function Home() {
           {selectedBlade === 0 && (
             <section className="blade-page-panel" aria-label="Projects">
               <h1 className="blade-page-header">Projects</h1>
+
               <div className="blade-page-body">
-                <div className="blade-page-list">
-                  {projects.map((project) => (
-                    <button
-                      className="blade-page-tile"
-                      key={project.title}
-                      type="button"
-                      onClick={() => window.open(project.url, "_blank", "noreferrer")}
-                    >
-                      {project.title}
-                    </button>
-                  ))}
-                </div>
+                <ProjectHoverTabs />
               </div>
             </section>
           )}
