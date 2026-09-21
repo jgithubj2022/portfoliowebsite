@@ -1,6 +1,7 @@
 "use client";
 
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Infinite3DBladeCarousel from "./components/infinite-3d-blade-carousel";
 import ProjectHoverTabs from "./components/project-hover-tabs";
 
 const blades = [
@@ -133,55 +134,32 @@ export default function Home() {
           </div>
 
           <section className="blade-row anim" aria-label="Portfolio sections">
-            {blades.map((blade, index) => {
-              const offset = index - selectedBlade;
-              const isActive = offset === 0;
-              const cardLeft =
-                offset < 0 ? `${-18 + offset * 7}rem` : isActive ? "0rem" : `${20 + (offset - 1) * 7.6}rem`;
-
-              return (
-                <button
-                  className={`blade-card ${isActive ? "is-active" : ""}`}
-                  key={blade.title}
-                  onClick={() => openBladePage(index)}
-                  type="button"
-                  style={
-                    {
-                      "--blade-offset": `${offset}`,
-                      "--blade-distance": `${Math.abs(offset)}`,
-                      "--card-left": cardLeft,
-                    } as CSSProperties
-                  }
-                  aria-pressed={isActive}
-                >
-                  <span className="blade-icon">{blade.stat}</span>
-                  <span className="blade-number">{blade.stat}</span>
-                  <span className="blade-eyebrow">{blade.eyebrow}</span>
-                  <strong>{blade.title}</strong>
-                </button>
-              );
-            })}
-            <nav className="control-strip anim" aria-label="Portfolio section controls">
-              <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.max(current - 1, 0))}>{"<"}</button>
-              <button className="control-dot muted" type="button" onClick={() => setSelectedBlade((current) => Math.min(current + 1, blades.length - 1))}>{">"}</button>
-            </nav>
+            <Infinite3DBladeCarousel
+              items={blades}
+              activeIndex={selectedBlade}
+              onActiveChange={setSelectedBlade}
+              onOpen={openBladePage}
+            />
           </section>
 
           <aside className="avatar-stage anim" aria-label="Blender avatar preview space">
-            <div className="avatar-hud anim" aria-hidden="true">
-              <span>Jiles Smith</span>
-              <span>Age: 21</span>
-              <span>Focus: Fullstack</span>
-              <span></span>
-            </div>
             <div className="avatar-shadow" />
-            <div className="avatar-video-frame">
-              <img
-                className="avatar-gif"
-                src="/avatar/avataridleV2.gif"
-                alt=""
-                aria-hidden="true"
-              />
+
+            <div className="avatar-visual">
+              <div className="avatar-hud" aria-hidden="true">
+                <span>Jiles Smith</span>
+                <span>Age: 21</span>
+                <span>Focus: Fullstack</span>
+              </div>
+
+              <div className="avatar-video-frame">
+                <img
+                  className="avatar-gif"
+                  src="/avatar/avataridleV2.gif"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </div>
             </div>
           </aside>
           </section>
